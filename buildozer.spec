@@ -1,0 +1,19 @@
+[app]
+title = ArcomaApp
+package.name = arcomaapp
+package.domain = org.arcoma
+source.dir = .
+source.exts = py,png,jpg,kv,atlas
+version = 1.0
+requirements = python3,kivy
+orientation = portrait
+osx.python_version = 3
+osx.kivy_version = 1.9.1
+fullscreen = 0
+android.permissions = INTERNET, ACCESS_NETWORK_STATE
+android.api = 33
+android.minapi = 21
+android.sdk = 33
+android.ndk = 25b
+android.archs = armeabi-v7a
+p4a.branch = master

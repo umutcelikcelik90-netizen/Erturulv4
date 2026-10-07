@@ -1,0 +1,33 @@
+name: V4 Build APK
+
+on:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          
+      - name: Install dependencies
+        run: |
+          sudo dpkg --add-architecture i386
+          sudo apt-get update
+          sudo apt-get install -y build-essential ccache git python3-pip openjdk-17-jdk autoconf libtool pkg-config zlib1g-dev libltdl-dev libncurses6:i386 libstdc++6:i386 libz1:i386
+          pip install --upgrade pip buildozer cython==0.29.36
+          
+      - name: Build V4 APK with Buildozer
+        run: |
+          buildozer -v android debug
+          
+      - name: Upload V4 APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: v4-package
+          path: bin/*.apk
